@@ -1,13 +1,14 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { runMain, useTempProject } from "./helpers/cli.js";
 import { expectValidEnvelope } from "./helpers/envelope-schema.js";
-import { runTests } from "../engines/pabst/src/run.js";
+import { runTests } from "../src/run.js";
+import { refute } from "../src/index.js";
 
 // The output contract holds even when the underlying vitest run is
 // unhealthy: one schema-valid envelope on stdout (every annotation
 // NotTried — generated but never evaluated), diagnostics on stderr, and
 // exit 2. Both unhealthy RunResult kinds are pinned by mocking runTests.
-vi.mock("../engines/pabst/src/run.js", () => ({ runTests: vi.fn() }));
+vi.mock("../src/run.js", () => ({ runTests: vi.fn() }));
 const runTestsMock = vi.mocked(runTests);
 
 describe("cli refute on unhealthy runs", () => {
@@ -35,7 +36,7 @@ describe("cli refute on unhealthy runs", () => {
         return true;
       });
     try {
-      const { code, stdout } = await runMain(["refute", "annotated.ts"]);
+      const { code, stdout } = await runMain(["annotated.ts"]);
       expect(code).toBe(2);
       expect(stdout).toHaveLength(1);
       const env = JSON.parse(stdout[0]!);
@@ -57,13 +58,34 @@ describe("cli refute on unhealthy runs", () => {
     }
   });
 
+  it("no-results through the API: the raw output reaches the caller's io, not stderr", async () => {
+    runTestsMock.mockReturnValue({
+      kind: "no-results",
+      status: 137,
+      stdout: "raw vitest stdout\n",
+      stderr: "raw vitest stderr\n",
+    });
+    const writeSpy = vi.spyOn(process.stderr, "write");
+    const raw: string[] = [];
+    try {
+      const report = await refute(["annotated.ts"], {
+        io: { note: () => {}, emit: () => {}, raw: (t) => raw.push(t) },
+      });
+      expect(report.code).toBe(2);
+      expect(raw.join("")).toBe("raw vitest stdout\nraw vitest stderr\n");
+      expect(writeSpy).not.toHaveBeenCalled();
+    } finally {
+      writeSpy.mockRestore();
+    }
+  });
+
   it("broken-run: prints a NotTried envelope, error lines on stderr, exit 2", async () => {
     runTestsMock.mockReturnValue({
       kind: "broken-run",
       status: 1,
-      messages: ["Cannot find module 'lakatos/runtime'"],
+      messages: ["Cannot find module '@lakatos/pabst/runtime'"],
     });
-    const { code, stdout, stderr } = await runMain(["refute", "annotated.ts"]);
+    const { code, stdout, stderr } = await runMain(["annotated.ts"]);
     expect(code).toBe(2);
     expect(stdout).toHaveLength(1);
     const env = JSON.parse(stdout[0]!);
@@ -76,7 +98,9 @@ describe("cli refute on unhealthy runs", () => {
         szs: "NotTried",
       },
     ]);
-    expect(stderr).toContain("error: Cannot find module 'lakatos/runtime'");
+    expect(stderr).toContain(
+      "error: Cannot find module '@lakatos/pabst/runtime'",
+    );
   });
 
   it("an unevaluated annotation carries no planned case count", async () => {
@@ -84,9 +108,9 @@ describe("cli refute on unhealthy runs", () => {
     runTestsMock.mockReturnValue({
       kind: "broken-run",
       status: 1,
-      messages: ["Cannot find module 'lakatos/runtime'"],
+      messages: ["Cannot find module '@lakatos/pabst/runtime'"],
     });
-    const { code, stdout } = await runMain(["refute", "bounded.ts"]);
+    const { code, stdout } = await runMain(["bounded.ts"]);
     expect(code).toBe(2);
     const env = JSON.parse(stdout[0]!);
     expectValidEnvelope(env);
@@ -121,7 +145,7 @@ describe("cli refute on unhealthy runs", () => {
         ],
       },
     });
-    const { code, stdout, stderr } = await runMain(["refute", "annotated.ts"]);
+    const { code, stdout, stderr } = await runMain(["annotated.ts"]);
     expect(code).toBe(2);
     expect(stdout).toHaveLength(1);
     const env = JSON.parse(stdout[0]!);

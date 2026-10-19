@@ -11,109 +11,109 @@ import { expectValidEnvelope } from "./helpers/envelope-schema.js";
 import { META } from "./helpers/fixtures.js";
 
 const root = process.cwd();
-const passSrc = path.join(root, "pabst/tests/fixtures/e2e/pass.ts");
-const failSrc = path.join(root, "pabst/tests/fixtures/e2e/fail.ts");
-const commutesSrc = path.join(root, "pabst/tests/fixtures/e2e/commutes.ts");
-const classPassSrc = path.join(root, "pabst/tests/fixtures/e2e/class-pass.ts");
-const classFailSrc = path.join(root, "pabst/tests/fixtures/e2e/class-fail.ts");
+const passSrc = path.join(root, "tests/fixtures/e2e/pass.ts");
+const failSrc = path.join(root, "tests/fixtures/e2e/fail.ts");
+const commutesSrc = path.join(root, "tests/fixtures/e2e/commutes.ts");
+const classPassSrc = path.join(root, "tests/fixtures/e2e/class-pass.ts");
+const classFailSrc = path.join(root, "tests/fixtures/e2e/class-fail.ts");
 const binderPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/binder-pass.ts",
+  "tests/fixtures/e2e/binder-pass.ts",
 );
 const binderFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/binder-fail.ts",
+  "tests/fixtures/e2e/binder-fail.ts",
 );
 const binderNestedPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/binder-nested-pass.ts",
+  "tests/fixtures/e2e/binder-nested-pass.ts",
 );
 const binderNestedFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/binder-nested-fail.ts",
+  "tests/fixtures/e2e/binder-nested-fail.ts",
 );
 const binderNestedExhaustedSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/binder-nested-exhausted.ts",
+  "tests/fixtures/e2e/binder-nested-exhausted.ts",
 );
 const accessorPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/accessor-pass.ts",
+  "tests/fixtures/e2e/accessor-pass.ts",
 );
 const accessorFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/accessor-fail.ts",
+  "tests/fixtures/e2e/accessor-fail.ts",
 );
-const nearMissSrc = path.join(root, "pabst/tests/fixtures/e2e/near-miss.ts");
+const nearMissSrc = path.join(root, "tests/fixtures/e2e/near-miss.ts");
 const stringLawsSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/string-laws.ts",
+  "tests/fixtures/e2e/string-laws.ts",
 );
 const intRoundTripSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/int-round-trip.ts",
+  "tests/fixtures/e2e/int-round-trip.ts",
 );
 const floatAssocSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/float-associativity.ts",
+  "tests/fixtures/e2e/float-associativity.ts",
 );
 const parseRoundTripSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/parse-round-trip.ts",
+  "tests/fixtures/e2e/parse-round-trip.ts",
 );
-const safeSqrtSrc = path.join(root, "pabst/tests/fixtures/e2e/safe-sqrt.ts");
-const boundedSrc = path.join(root, "pabst/tests/fixtures/e2e/bounded.ts");
+const safeSqrtSrc = path.join(root, "tests/fixtures/e2e/safe-sqrt.ts");
+const boundedSrc = path.join(root, "tests/fixtures/e2e/bounded.ts");
 const regexGuardSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/regex-guard.ts",
+  "tests/fixtures/e2e/regex-guard.ts",
 );
 const equationPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/equation-pass.ts",
+  "tests/fixtures/e2e/equation-pass.ts",
 );
 const equationFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/equation-fail.ts",
+  "tests/fixtures/e2e/equation-fail.ts",
 );
 const exhaustedSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/precondition-exhausted.ts",
+  "tests/fixtures/e2e/precondition-exhausted.ts",
 );
 const throwingGuardSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/throwing-guard.ts",
+  "tests/fixtures/e2e/throwing-guard.ts",
 );
 const connectivesSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/connectives.ts",
+  "tests/fixtures/e2e/connectives.ts",
 );
 const atomNotBoolSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/atom-not-boolean.ts",
+  "tests/fixtures/e2e/atom-not-boolean.ts",
 );
 const readmeExampleSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/readme-example.ts",
+  "tests/fixtures/e2e/readme-example.ts",
 );
 const enumeratedPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-pass.ts",
+  "tests/fixtures/e2e/enumerated-pass.ts",
 );
 const enumeratedFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-fail.ts",
+  "tests/fixtures/e2e/enumerated-fail.ts",
 );
 const enumeratedVacuousSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-vacuous.ts",
+  "tests/fixtures/e2e/enumerated-vacuous.ts",
 );
 const enumeratedBudgetSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-budget.ts",
+  "tests/fixtures/e2e/enumerated-budget.ts",
 );
 const enumeratedSlowOneSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-slow-one.ts",
+  "tests/fixtures/e2e/enumerated-slow-one.ts",
 );
 // Tens of milliseconds: enough for the budget fixtures to overrun without
 // making the suite wait on them.
@@ -121,21 +121,21 @@ const SHORT_BUDGET = { loopBudgetMs: 40 };
 
 const enumeratedCapSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-cap.ts",
+  "tests/fixtures/e2e/enumerated-cap.ts",
 );
 const enumeratedClassPassSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-class-pass.ts",
+  "tests/fixtures/e2e/enumerated-class-pass.ts",
 );
 const enumeratedClassFailSrc = path.join(
   root,
-  "pabst/tests/fixtures/e2e/enumerated-class-fail.ts",
+  "tests/fixtures/e2e/enumerated-class-fail.ts",
 );
 // The generated tests import "@lakatos/pabst/runtime" through the workspace
 // link, so they must live inside the repo tree; this suite gets its
 // own root there rather than sharing one with a CLI run.
 const OUT_ROOT = ".lakatos/pabst-e2e";
-const genDir = path.join(root, OUT_ROOT, "pabst/tests/fixtures/e2e");
+const genDir = path.join(root, OUT_ROOT, "tests/fixtures/e2e");
 
 function clean(): void {
   fs.rmSync(genDir, { recursive: true, force: true });
@@ -370,12 +370,12 @@ describe("end-to-end: sampled rows, seed 3", () => {
   });
 
   it("the README front-page example is verbatim on disk and is falsified", () => {
-    const readme = fs.readFileSync(path.join(root, "pabst/README.md"), "utf8");
+    const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
     const block = /```ts\n([\s\S]*?)```/.exec(readme)?.[1];
     expect(block, "README has no ```ts code block").toBeDefined();
     expect(
       fs.readFileSync(readmeExampleSrc, "utf8"),
-      "pabst/tests/fixtures/e2e/readme-example.ts must be byte-identical to the README's first ts block",
+      "tests/fixtures/e2e/readme-example.ts must be byte-identical to the README's first ts block",
     ).toBe(block);
     const issues = issuesFor(env, readmeExampleSrc);
     expect(issues).toHaveLength(1);

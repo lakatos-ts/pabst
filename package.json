@@ -17,12 +17,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lakatos-ts/lakatos.git",
-    "directory": "pabst"
+    "url": "git+https://github.com/lakatos-ts/pabst.git"
   },
-  "homepage": "https://github.com/lakatos-ts/lakatos#readme",
+  "homepage": "https://github.com/lakatos-ts/pabst#readme",
   "bugs": {
-    "url": "https://github.com/lakatos-ts/lakatos/issues"
+    "url": "https://github.com/lakatos-ts/pabst/issues"
   },
   "exports": {
     ".": {
@@ -34,13 +33,32 @@
       "default": "./dist/runtime.js"
     }
   },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b && tsc -p tsconfig.tests.json",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "coverage": "vitest run --coverage",
+    "mutation": "stryker run"
+  },
   "dependencies": {
-    "@lakatos/lemma": "^0.1.0",
+    "@lakatos/lemma": "^0.2.1",
     "vitest": "^5.0.0"
   },
   "peerDependencies": {
     "@fast-check/vitest": "^0.5.0",
     "fast-check": "^4.8.0"
+  },
+  "devDependencies": {
+    "@fast-check/vitest": "^0.5.0",
+    "@stryker-mutator/core": "^9.6.1",
+    "@types/node": "^26.6.4",
+    "@vitest/coverage-v8": "^5.0.3",
+    "ajv": "^8.20.0",
+    "fast-check": "^4.10.2",
+    "prettier": "3.9.9",
+    "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"

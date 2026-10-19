@@ -59,7 +59,7 @@ describe("cli refute envelopes", () => {
       const env = JSON.parse(stdout[0]!);
       expectValidEnvelope(env);
       const pkg = JSON.parse(
-        fs.readFileSync(path.join(repoRoot, "pabst", "package.json"), "utf8"),
+        fs.readFileSync(path.join(repoRoot, "package.json"), "utf8"),
       );
       expect(env).toMatchObject({
         version: pkg.version,

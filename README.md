@@ -41,7 +41,7 @@ is evidence that it holds, but the property might still be
 false on inputs the generator never tried. If your goal is
 to prove the absence of counterexamples, you need
 proof-based tools such as
-[Thales](../thales/), this repository's proof engine. That said,
+[Thales](https://github.com/lakatos-ts/thales), lakatos's proof engine. That said,
 property-based testing is a powerful technique that exposes
 a lot of bugs for very little effort, and it sits
 comfortably alongside proof-based approaches.
@@ -161,7 +161,7 @@ unexported symbol, which are reported as a one-line message on stderr.
 
 ## Grammar
 
-The normative grammar lives in [`lemma/spec/grammar.ebnf`](../../lemma/spec/grammar.ebnf);
+The normative grammar lives in lemma's [`spec/grammar.ebnf`](https://github.com/lakatos-ts/lemma/blob/main/spec/grammar.ebnf);
 this section is the guided tour.
 
 A property is a universally quantified formula in Pabst's **logic surface**.
@@ -251,13 +251,12 @@ name) if it fails. Generated files land in the run's own directory (see
 
 ## Development
 
-Pabst is built and tested as the workspace package `@lakatos/pabst` —
-run everything from the repository root:
-
 ```bash
-npm install
-npm test          # vitest (root suite, includes pabst/tests)
-npm run build     # tsc -b: lemma, then pabst/dist/
+npm ci
+npm run build       # tsc -b: dist/
+npm run typecheck   # sources and tests
+npm test            # vitest; builds first
+npm run coverage    # the ratcheted gate CI enforces
 ```
 
 Requires Node 24+.

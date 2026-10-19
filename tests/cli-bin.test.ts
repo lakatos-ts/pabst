@@ -5,13 +5,13 @@ import * as path from "node:path";
 import * as os from "node:os";
 
 const root = process.cwd();
-const cliJs = path.join(root, "pabst", "dist", "cli.js");
+const cliJs = path.join(root, "dist", "cli.js");
 
 // npm exposes the bin as a symlink (node_modules/.bin/pabst ->
 // pabst/dist/cli.js), so these run the built bin the way an installed copy
 // runs: argv[1] names the symlink, not the real file. The build itself is
 // the suite-wide globalSetup's.
-describe("pabst/dist/cli.js as an installed bin", () => {
+describe("dist/cli.js as an installed bin", () => {
   it("starts with an env-node shebang", () => {
     const firstLine = fs.readFileSync(cliJs, "utf8").split("\n", 1)[0];
     expect(firstLine).toBe("#!/usr/bin/env node");

@@ -2,7 +2,7 @@
 
 Pabst is the lakatos refutation tool: `@ensures` annotations become fast-check property tests, generated into the target project's per-run directory and executed with vitest; failures come back as per-annotation issues mapped to SZS statuses (`falsified` → CounterSatisfiable, `threw` → Error, `exhausted` → GaveUp, `budget` → Timeout).
 
-Workspace package `@lakatos/pabst`: the `refute` API (`src/refute.ts`, barrel `src/index.ts`), the `pabst` bin (`src/cli.ts`), and the `./runtime` export the generated tests import. It builds, tests, and typechecks from the repo root. The front half of a run (resolution, the typecheck gate, formula typing) is lemma's `admit`; the back half (run dir, interrupt guard, envelope, exit code) is `src/runner.ts`'s `runTool`; the refute spine plugs into it. Annotation parsing is not here either: pabst consumes lemma's parsed `Binder`/`Formula` and owns only what is fast-check-specific.
+The package `@lakatos/pabst`: the `refute` API (`src/refute.ts`, barrel `src/index.ts`), the `pabst` bin (`src/cli.ts`), and the `./runtime` export the generated tests import. `npm run build`, `typecheck`, `test`, `format:check`, and `coverage` are the local gate, and CI (`.github/workflows/ci.yml`) runs the same; vitest's global setup builds first, since the bin suites spawn `dist/cli.js` and generated tests import `@lakatos/pabst/runtime` by the package's own name. lemma comes from npm (`@lakatos/lemma`); GitHub Issues on `lakatos-ts/pabst` is the tracker. The front half of a run (resolution, the typecheck gate, formula typing) is lemma's `admit`; the back half (run dir, interrupt guard, envelope, exit code) is `src/runner.ts`'s `runTool`; the refute spine plugs into it. Annotation parsing is not here either: pabst consumes lemma's parsed `Binder`/`Formula` and owns only what is fast-check-specific.
 
 ## Where to start
 
@@ -24,8 +24,8 @@ Workspace package `@lakatos/pabst`: the `refute` API (`src/refute.ts`, barrel `s
 ## Conventions
 
 - **Generated code is disposable.** Every run writes a fresh directory; determinism comes from the seed.
-- **Engine-neutral logic goes to `lemma/`; fast-check-specific logic stays here.** `domains.ts` must not re-derive bounds arithmetic.
+- **Engine-neutral logic goes to lemma; fast-check-specific logic stays here.** `domains.ts` must not re-derive bounds arithmetic.
 - **Input faults throw `LemmaError`** (exit 2 with a one-line diagnostic); anything else escaping is an internal bug. An unrepresentable domain is not the input's fault: contained per annotation, never a run-level abort.
 - **Never depend on thales**, and vice versa; sharing goes through `@lakatos/lemma`.
 
-Stryker (`npm run mutation`, root config) targets pabst's sources but runs locally only; CI runs the vitest suite.
+Stryker (`npm run mutation`, `stryker.config.mjs`) targets the sources but runs locally only; CI runs the vitest suite.

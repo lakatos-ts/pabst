@@ -1,0 +1,7 @@
+// Typecheck-only pass over the tests and their fixtures. Vitest transpiles
+// with esbuild and never typechecks.
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": { "noEmit": true, "declaration": false },
+  "include": ["src", "tests"]
+}

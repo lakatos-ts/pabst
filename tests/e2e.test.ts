@@ -16,14 +16,8 @@ const failSrc = path.join(root, "tests/fixtures/e2e/fail.ts");
 const commutesSrc = path.join(root, "tests/fixtures/e2e/commutes.ts");
 const classPassSrc = path.join(root, "tests/fixtures/e2e/class-pass.ts");
 const classFailSrc = path.join(root, "tests/fixtures/e2e/class-fail.ts");
-const binderPassSrc = path.join(
-  root,
-  "tests/fixtures/e2e/binder-pass.ts",
-);
-const binderFailSrc = path.join(
-  root,
-  "tests/fixtures/e2e/binder-fail.ts",
-);
+const binderPassSrc = path.join(root, "tests/fixtures/e2e/binder-pass.ts");
+const binderFailSrc = path.join(root, "tests/fixtures/e2e/binder-fail.ts");
 const binderNestedPassSrc = path.join(
   root,
   "tests/fixtures/e2e/binder-nested-pass.ts",
@@ -36,23 +30,11 @@ const binderNestedExhaustedSrc = path.join(
   root,
   "tests/fixtures/e2e/binder-nested-exhausted.ts",
 );
-const accessorPassSrc = path.join(
-  root,
-  "tests/fixtures/e2e/accessor-pass.ts",
-);
-const accessorFailSrc = path.join(
-  root,
-  "tests/fixtures/e2e/accessor-fail.ts",
-);
+const accessorPassSrc = path.join(root, "tests/fixtures/e2e/accessor-pass.ts");
+const accessorFailSrc = path.join(root, "tests/fixtures/e2e/accessor-fail.ts");
 const nearMissSrc = path.join(root, "tests/fixtures/e2e/near-miss.ts");
-const stringLawsSrc = path.join(
-  root,
-  "tests/fixtures/e2e/string-laws.ts",
-);
-const intRoundTripSrc = path.join(
-  root,
-  "tests/fixtures/e2e/int-round-trip.ts",
-);
+const stringLawsSrc = path.join(root, "tests/fixtures/e2e/string-laws.ts");
+const intRoundTripSrc = path.join(root, "tests/fixtures/e2e/int-round-trip.ts");
 const floatAssocSrc = path.join(
   root,
   "tests/fixtures/e2e/float-associativity.ts",
@@ -63,18 +45,9 @@ const parseRoundTripSrc = path.join(
 );
 const safeSqrtSrc = path.join(root, "tests/fixtures/e2e/safe-sqrt.ts");
 const boundedSrc = path.join(root, "tests/fixtures/e2e/bounded.ts");
-const regexGuardSrc = path.join(
-  root,
-  "tests/fixtures/e2e/regex-guard.ts",
-);
-const equationPassSrc = path.join(
-  root,
-  "tests/fixtures/e2e/equation-pass.ts",
-);
-const equationFailSrc = path.join(
-  root,
-  "tests/fixtures/e2e/equation-fail.ts",
-);
+const regexGuardSrc = path.join(root, "tests/fixtures/e2e/regex-guard.ts");
+const equationPassSrc = path.join(root, "tests/fixtures/e2e/equation-pass.ts");
+const equationFailSrc = path.join(root, "tests/fixtures/e2e/equation-fail.ts");
 const exhaustedSrc = path.join(
   root,
   "tests/fixtures/e2e/precondition-exhausted.ts",
@@ -83,10 +56,7 @@ const throwingGuardSrc = path.join(
   root,
   "tests/fixtures/e2e/throwing-guard.ts",
 );
-const connectivesSrc = path.join(
-  root,
-  "tests/fixtures/e2e/connectives.ts",
-);
+const connectivesSrc = path.join(root, "tests/fixtures/e2e/connectives.ts");
 const atomNotBoolSrc = path.join(
   root,
   "tests/fixtures/e2e/atom-not-boolean.ts",

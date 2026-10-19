@@ -40,7 +40,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "coverage": "vitest run --coverage",
-    "mutation": "stryker run"
+    "mutation": "stryker run",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@lakatos/lemma": "^0.2.1",
